@@ -52,6 +52,7 @@ function addNote(note) {
     lengthsList.push(1);
     console.log(notesList);
 }
+/*
 c.addEventListener("click", addNote(261.63));
 d.addEventListener("click", addNote(293.66));
 e.addEventListener("click", addNote(329.63));
@@ -60,3 +61,5 @@ g.addEventListener("click", addNote(392.00));
 a.addEventListener("click", addNote(440.00));
 b.addEventListener("click", addNote(493.88));
 play.addEventListener("click", playLine(notesList, lengthsList, 120))
+*/
+c.addEventListener("click", console.log())
