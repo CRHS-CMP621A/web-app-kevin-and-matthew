@@ -1,0 +1,26 @@
+body {
+    background-color: #ffffff
+    ;
+  }
+button {
+    background-color: #4CAF50; 
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.2s;
+  }
+  
+  button:hover {
+    background-color: #4cbe50;  
+    color: white;
+  }
+  .note {
+    width:10px;
+    height:10px;
+    background-color: #000000;
+  }

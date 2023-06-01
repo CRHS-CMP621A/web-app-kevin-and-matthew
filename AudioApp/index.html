@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+
+    <h1>Audio API</h1>
+    <button type = "input" class = "c" onClick = "addNote(261.63)">C</button>
+    <button type = "input" class = "c-sharp" onClick = "addNote(277.18)">C#</button>
+    <button type = "input" class = "d" onClick = "addNote(293.66)">D</button>
+    <button type = "input" class = "d-sharp" onClick = "addNote(311.13)">D#</button>
+    <button type = "input" class = "e" onClick = "addNote(329.63)">E</button>
+    <button type = "input" class = "f" onClick = "addNote(349.23)">F</button>
+    <button type = "input" class = "f-sharp" onClick = "addNote(369.99)">F#</button>
+    <button type = "input" class = "g" onClick = "addNote(392.00)">G</button>
+    <button type = "input" class = "g-sharp" onClick = "addNote(415.30)">G#</button>
+    <button type = "input" class = "a" onClick = "addNote(440.00)">A</button>
+    <button type = "input" class = "a-sharp" onClick = "addNote(466.16)">A#</button>
+    <button type = "input" class = "b" onClick = "addNote(493.88)">B</button>
+    <br>
+    <button type = "input" class = "quarter" onClick = "addLength(1)">Quarter Note</button>
+    <button type = "input" class = "half" onClick = "addLength(2)">Half Note</button>
+    <button type = "input" class = "whole" onClick = "addLength(4)">Whole Note</button>
+    <button type = "input" class = "eighth" onClick = "addLength(0.5)">Eighth Note</button>
+    <button type = "input" class = "dot" onClick = "addDot()">Add dot</button>
+    <br>
+    <button type = "input" class = "upOctave" onClick = "upOctave()">Up one octave</button>
+    <button type = "input" class = "downOctave" onClick = "downOctave()">Down one octave</button>
+    <button type = "input" class = "delete" onClick = "deleteNote()">Delete</button>
+    <button type = "input" class = "save" onClick = "save()">Save Melody</button>
+    <br>
+    <button type = "input" class = "play" onClick = "playLine(notesList, lengthsList, tempo)">Play</button>
+    
+    <br>
+    <label for = "volume" >Volume</label>
+    <input type = "range" name = "volume" class = "volume" min = "0" max = "100" value = "50">
+    <br>
+    <label for = "Tempo" >Tempo</label>
+    <input type = "range" name = "Tempo" class = "tempo" min = 40 max = 200 onchange="changeTempo()" value = 120>
+    <br>
+    <label for = "Chorus" >Chorus</label>
+    <input type = "range" name = "Choms" class = "chorus" min = 0 max = 100  value = 50>
+    <br>
+    <label for = "Echo" >Echo</label>
+    <input type = "range" name = "Echo" class = "echo" min = 0 max = 100 value = 50>
+    <script defer src = "new.js"></script>
+    <div class = "staff" id = "staff"></div>
+</body>
