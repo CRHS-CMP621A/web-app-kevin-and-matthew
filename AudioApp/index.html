@@ -9,8 +9,10 @@
     <link href="styles.css" rel="stylesheet">
 </head>
 <body>
-
+<div class = "container">
     <h1>Audio API</h1>
+    <a href = "saved.html">My saved Melodies</a>
+    <br>
     <button type = "input" class = "c" onClick = "addNote(261.63)">C</button>
     <button type = "input" class = "c-sharp" onClick = "addNote(277.18)">C#</button>
     <button type = "input" class = "d" onClick = "addNote(293.66)">D</button>
@@ -50,5 +52,19 @@
     <label for = "Echo" >Echo</label>
     <input type = "range" name = "Echo" class = "echo" min = 0 max = 100 value = 50>
     <script defer src = "new.js"></script>
-    <div class = "staff" id = "staff"></div>
+    <div class = "staff" id = "staff1">
+        <p class = "c-label note-label">C</p>
+        <p class = "c-sharp-label note-label">C#</p>
+        <p class = "d-label note-label">D</p>
+        <p class = "d-sharp-label note-label">D#</p>
+        <p class = "e-label note-label">E</p>
+        <p class = "f-label note-label">F</p>
+        <p class = "f-sharp-label note-label">F#</p>
+        <p class = "g-label note-label">G</p>
+        <p class = "g-sharp-label note-label">G#</p>
+        <p class = "a-label note-label">A</p>
+        <p class = "a-sharp-label note-label">A#</p>
+        <p class = "b-label note-label">B</p>
+    </div>
+</div>
 </body>

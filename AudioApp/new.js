@@ -12,7 +12,8 @@ let lengthsList = []
 let tempo = 120
 let noteOrLength = 0
 let noteVisuals = []
-function playNote(frequency, start, duration) {
+let staves = 1
+function playNote(frequency, start, duration,) {
     console.log(frequency)
 
     let audioContext = new AudioContext();
@@ -44,6 +45,8 @@ function playNote(frequency, start, duration) {
 
     volume.gain.linearRampToValueAtTime(0, start + duration);
     volume2.gain.linearRampToValueAtTime(0, start + duration + (echo / 100))
+    
+   
 
     osc1.start(audioContext.currentTime + start);
     osc2.start(audioContext.currentTime + start);
@@ -51,7 +54,8 @@ function playNote(frequency, start, duration) {
     osc1.stop(start + duration);
     osc2.stop(start + duration);
     osc3.stop(start + duration + (echo / 50));
-}
+
+    
 
 function playLine(notes, noteLengths, tempo) {
     if (notesList.length === lengthsList.length){ 
@@ -59,12 +63,14 @@ function playLine(notes, noteLengths, tempo) {
             let time = 0
             for (let j = 0; j<= i; j++) {
                 time += 60 / tempo * noteLengths[j]
-            } 
-            playNote(Number(notes[i]), time, 60 / tempo * noteLengths[i]);
+            }
+            
+    
+            playNote(Number(notes[i]), time, 60 / tempo * noteLengths[i],);
         }
     }
 }
-
+}
 
 function addNote(note) {
     if (noteOrLength === 0) {
@@ -73,19 +79,25 @@ function addNote(note) {
         noteOrLength = 1
 
     }
-    console.log(notesList);
+    //console.log(notesList);
 }
 function addLength(length) {
     if (noteOrLength === 1) {
         let notesNumber = notesList.length
-        let noteHeight = 12 * Math.log2(notesList[-1])
+        let lastNote = notesList.pop()
+        let noteHeight = 13 - (Math.round(12 * Math.log2(lastNote / 440)) + 10);
         console.log(noteHeight)
+        while (noteHeight < 1) {
+            noteHeight += 12;
+        }
+
         lengthsList.push(length);
         noteOrLength = 0
-        createNote(notesNumber, length);
-        positionNote(notesNumber, noteHeight);
+        notesList.push(lastNote);
+        createNote(notesNumber);
+        positionNote(notesNumber, noteHeight, length);
     }
-    console.log (lengthsList)
+    //console.log (lengthsList)
 }
 function changeTempo() {
     tempo = Number(document.querySelector(".tempo").value);
@@ -105,24 +117,36 @@ function addDot() {
     lengthsList.push(lastLength);
 }
 
-function createNote(id, length) {
+function createNote(id) {
     let note = document.createElement("div");
     note.setAttribute("id", `note${id}`);
     note.setAttribute("class", "note")
-    document.getElementById("staff").appendChild(note);
+    document.getElementById(`staff${staves}`).appendChild(note);
     noteVisuals.push(note);
-    console.log(noteVisuals);
-    document.querySelector(`#note${id}`).style.position = "absolute";
-    document.querySelector(`#note${id}`).style.length = `${length * 10}px`;
+    //console.log(noteVisuals);
+    
 }
 
-function positionNote(id, position,) {
+function positionNote(id, position, length) {
     let x = 0
-    for (each in lengthsList) {
-        x += each;
+    for (let i = 0; i < lengthsList.length - 1; i++) {
+        x += lengthsList[i] * 2;
     }
-    document.querySelector(`#note${id}`).style.top = `${336 + position}px`
-    document.querySelector(`#note${id}`).style.left = x 
+    x += 2 // one to the right of last note plus one to the right of the labels
+
+    console.log(`Column: ${x}`)
+    console.log(`Position: ${position}`)
+    console.log(`Length: ${length}`)
+    document.querySelector(`#note${id}`).style.gridColumn = `${x} / ${x + length * 2}`
+    document.querySelector(`#note${id}`).style.gridRow = `${position} / ${position + 1}`
+    console.log(document.querySelector(`#note${id}`).style.gridColumn)
+    console.log(document.querySelector(`#note${id}`).style.gridRow)
+    
+
+
+}
+function createStaff() {
+    staves += 1
 
 }
 
