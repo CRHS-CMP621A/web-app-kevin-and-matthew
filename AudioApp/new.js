@@ -36,7 +36,7 @@ function changeToSaved(){
         <h2 class = melody${i}>${melodies[i].title}</h2>
         <button type = "input" onClick = "playLine(melodies[${i}].notes, melodies[${i}].lengths, tempo)">Play</button>
     `
-    document.querySelector(".saved-header").insertAdjacentHTML("beforeend", html)
+    document.querySelector(".music-boxes").insertAdjacentHTML("beforeend", html)
 }
 }
 
