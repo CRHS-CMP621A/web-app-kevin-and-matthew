@@ -1,7 +1,4 @@
-body {
-    background-color: #ffffff
-    ;
-  }
+
 button {
     background-color: #4CAF50; 
     border: none;
@@ -72,6 +69,7 @@ button {
   height: 20px;
   width: 20px; 
   margin: 0px 0px;
+
 }
 
 body {
@@ -95,4 +93,26 @@ table {
 td, th {
   border: none;
   padding: 20px;
+}
+header {
+  width:100%;
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.melody-box {
+  display:flex;
+  align-items: center;
+  justify-content: start;
+}
+
+a, a:visited {
+  color:rgb(108, 149, 185)
+}
+
+main {
+  display:flex;
+  width:1000px;
+  justify-content: space-between;
 }

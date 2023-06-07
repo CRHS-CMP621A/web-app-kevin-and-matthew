@@ -13,6 +13,33 @@ let tempo = 120
 let noteOrLength = 0
 let noteVisuals = []
 let staves = 1
+let melodies = []
+
+class Melody {
+    constructor(notes, lengths, title) {
+        this.notes = notes;
+        this.lengths = lengths;
+        this.title = title  
+    }
+
+}
+
+const data = JSON.parse(localStorage.getItem("melodies"));
+if (data) {
+    melodies = data;
+}
+
+function changeToSaved(){
+    console.log("test")
+    for (let i = 0; i < melodies.length; i ++) {
+        let html = `
+        <h2 class = melody${i}>${melodies[i].title}</h2>
+        <button type = "input" onClick = "playLine(melodies[${i}].notes, melodies[${i}].lengths, tempo)">Play</button>
+    `
+    document.querySelector(".saved-header").insertAdjacentHTML("beforeend", html)
+}
+}
+
 function playNote(frequency, start, duration,) {
     console.log(frequency)
 
@@ -56,7 +83,7 @@ function playNote(frequency, start, duration,) {
     osc3.stop(start + duration + (echo / 50));
 
     
-
+}
 function playLine(notes, noteLengths, tempo) {
     if (notesList.length === lengthsList.length){ 
         for (let i = 0; i < notes.length; i ++) {
@@ -70,7 +97,7 @@ function playLine(notes, noteLengths, tempo) {
         }
     }
 }
-}
+
 
 function addNote(note) {
     if (noteOrLength === 0) {
@@ -78,6 +105,11 @@ function addNote(note) {
         notesList.push(note);
         noteOrLength = 1
 
+    }
+    else {
+        let changeNote = notesList.pop();
+        changeNote = note;
+        notesList.push(changeNote);
     }
     //console.log(notesList);
 }
@@ -94,8 +126,8 @@ function addLength(length) {
         lengthsList.push(length);
         noteOrLength = 0
         notesList.push(lastNote);
-        createNote(notesNumber);
-        positionNote(notesNumber, noteHeight, length);
+        createNote(notesNumber, noteHeight, length);
+        //positionNote(notesNumber, noteHeight, length);
     }
     //console.log (lengthsList)
 }
@@ -117,23 +149,24 @@ function addDot() {
     lengthsList.push(lastLength);
 }
 
-function createNote(id) {
+function createNote(id, position, length) {
     let note = document.createElement("div");
     note.setAttribute("id", `note${id}`);
     note.setAttribute("class", "note")
-    document.getElementById(`staff${staves}`).appendChild(note);
-    noteVisuals.push(note);
-    //console.log(noteVisuals);
     
-}
-
-function positionNote(id, position, length) {
+    noteVisuals.push(note);
     let x = 0
     for (let i = 0; i < lengthsList.length - 1; i++) {
         x += lengthsList[i] * 2;
     }
     x += 2 // one to the right of last note plus one to the right of the labels
-
+    if (x + length > 40 * staves) {
+        createStaff();
+        while (x + length > 40) {
+            x -= 40;
+        }
+    }
+    document.getElementById(`staff${staves}`).appendChild(note);
     console.log(`Column: ${x}`)
     console.log(`Position: ${position}`)
     console.log(`Length: ${length}`)
@@ -142,16 +175,65 @@ function positionNote(id, position, length) {
     console.log(document.querySelector(`#note${id}`).style.gridColumn)
     console.log(document.querySelector(`#note${id}`).style.gridRow)
     
-
-
 }
+
 function createStaff() {
     staves += 1
-
+    let newStaff = document.createElement("div");
+    let newLabelC = document.createElement("p");
+    let newLabelCSharp = document.createElement("p");
+    let newLabelD = document.createElement("p");
+    let newLabelDSharp = document.createElement("p");
+    let newLabelE = document.createElement("p");
+    let newLabelF = document.createElement("p");
+    let newLabelFSharp = document.createElement("p");
+    let newLabelG = document.createElement("p");
+    let newLabelGSharp = document.createElement("p");
+    let newLabelA = document.createElement("p");
+    let newLabelASharp = document.createElement("p");
+    let newLabelB = document.createElement("p");
+    newStaff.setAttribute("class", "staff");
+    newStaff.setAttribute("id", `staff${staves}`);
+    newLabelC.setAttribute("class", "c-label note-label");
+    newLabelCSharp.setAttribute("class", "c-sharp-label note-label");
+    newLabelD.setAttribute("class", "d-label note-label");
+    newLabelDSharp.setAttribute("class", "d-sharp-label note-label");
+    newLabelE.setAttribute("class", "e-label note-label");
+    newLabelF.setAttribute("class", "f-label note-label");
+    newLabelFSharp.setAttribute("class", "f-sharp-label note-label");
+    newLabelG.setAttribute("class", "g-label note-label");
+    newLabelGSharp.setAttribute("class", "g-sharp-label note-label");
+    newLabelA.setAttribute("class", "a-label note-label");
+    newLabelASharp.setAttribute("class", "a-sharp-label note-label");
+    newLabelB.setAttribute("class", "b-label note-label");
+    document.getElementById("container").appendChild(newStaff);
+    document.getElementById(`staff${staves}`).appendChild(newLabelC);
+    document.getElementById(`staff${staves}`).appendChild(newLabelCSharp);
+    document.getElementById(`staff${staves}`).appendChild(newLabelD);
+    document.getElementById(`staff${staves}`).appendChild(newLabelDSharp);
+    document.getElementById(`staff${staves}`).appendChild(newLabelE);
+    document.getElementById(`staff${staves}`).appendChild(newLabelF);
+    document.getElementById(`staff${staves}`).appendChild(newLabelFSharp);
+    document.getElementById(`staff${staves}`).appendChild(newLabelG);
+    document.getElementById(`staff${staves}`).appendChild(newLabelGSharp);
+    document.getElementById(`staff${staves}`).appendChild(newLabelA);
+    document.getElementById(`staff${staves}`).appendChild(newLabelASharp);
+    document.getElementById(`staff${staves}`).appendChild(newLabelB);
 }
 
 function deleteNote() {
+    let removeNote = document.getElementById(`note${notesList.length}`);
+    removeNote.remove();
+    notesList.pop();
+    lengthsList.pop();
+    
+}
 
+function save() {
+    let title = document.querySelector(".title").value;
+    newMelody = new Melody(notesList, lengthsList, title);
+    melodies.push(newMelody);
+    localStorage.setItem("melodies", JSON.stringify(melodies));
 }
 /*
 c.addEventListener("click", addNote(261.63));
