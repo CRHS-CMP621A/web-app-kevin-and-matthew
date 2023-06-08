@@ -14,7 +14,7 @@ let noteOrLength = 0
 let noteVisuals = []
 let staves = 1
 let melodies = []
-
+let notes = ["C", "D", "E", "F", "G", "A", "B"]
 class Melody {
     constructor(notes, lengths, title) {
         this.notes = notes;
@@ -30,7 +30,7 @@ if (data) {
 }
 
 function changeToSaved(){
-    console.log("test")
+
     for (let i = 0; i < melodies.length; i ++) {
         let html = `
         <h2 class = melody${i}>${melodies[i].title}</h2>
@@ -41,7 +41,7 @@ function changeToSaved(){
 }
 
 function playNote(frequency, start, duration,) {
-    console.log(frequency)
+
 
     let audioContext = new AudioContext();
     let osc1 = audioContext.createOscillator();
@@ -51,7 +51,7 @@ function playNote(frequency, start, duration,) {
     let volume2 = audioContext.createGain();
     let chorus = Number(document.querySelector(".chorus").value)
     let echo = Number(document.querySelector(".echo").value)
-    console.log(echo)
+
     
     volume.gain.value = Number(document.querySelector(".volume").value) / 100;
     volume2.gain.value = Number(document.querySelector(".volume").value) / 150
@@ -111,14 +111,14 @@ function addNote(note) {
         changeNote = note;
         notesList.push(changeNote);
     }
-    //console.log(notesList);
+
 }
 function addLength(length) {
     if (noteOrLength === 1) {
         let notesNumber = notesList.length
         let lastNote = notesList.pop()
         let noteHeight = 13 - (Math.round(12 * Math.log2(lastNote / 440)) + 10);
-        console.log(noteHeight)
+
         while (noteHeight < 1) {
             noteHeight += 12;
         }
@@ -129,18 +129,18 @@ function addLength(length) {
         createNote(notesNumber, noteHeight, length);
         //positionNote(notesNumber, noteHeight, length);
     }
-    //console.log (lengthsList)
+
 }
 function changeTempo() {
     tempo = Number(document.querySelector(".tempo").value);
-    console.log(tempo);
+
 }
 
 function upOctave() {
     let lastNote = notesList.pop();
     lastNote = lastNote * 2;
     notesList.push(lastNote);
-    console.log(notesList);
+
 }
 
 function addDot() {
@@ -162,25 +162,25 @@ function createNote(id, position, length) {
     x += 2 // one to the right of last note plus one to the right of the labels
     if (x + length > 40 * staves) {
         createStaff();
-        while (x + length > 40) {
-            x -= 40;
-        }
+        
+    }
+    while (x + length > 40) {
+        x -= 40;
     }
     document.getElementById(`staff${staves}`).appendChild(note);
-    console.log(`Column: ${x}`)
-    console.log(`Position: ${position}`)
-    console.log(`Length: ${length}`)
+
     document.querySelector(`#note${id}`).style.gridColumn = `${x} / ${x + length * 2}`
     document.querySelector(`#note${id}`).style.gridRow = `${position} / ${position + 1}`
-    console.log(document.querySelector(`#note${id}`).style.gridColumn)
-    console.log(document.querySelector(`#note${id}`).style.gridRow)
+
     
 }
 
 function createStaff() {
     staves += 1
+    let space = document.createElement("br")
     let newStaff = document.createElement("div");
     let newLabelC = document.createElement("p");
+    let node 
     let newLabelCSharp = document.createElement("p");
     let newLabelD = document.createElement("p");
     let newLabelDSharp = document.createElement("p");
@@ -192,6 +192,7 @@ function createStaff() {
     let newLabelA = document.createElement("p");
     let newLabelASharp = document.createElement("p");
     let newLabelB = document.createElement("p");
+
     newStaff.setAttribute("class", "staff");
     newStaff.setAttribute("id", `staff${staves}`);
     newLabelC.setAttribute("class", "c-label note-label");
@@ -206,7 +207,34 @@ function createStaff() {
     newLabelA.setAttribute("class", "a-label note-label");
     newLabelASharp.setAttribute("class", "a-sharp-label note-label");
     newLabelB.setAttribute("class", "b-label note-label");
+    document.getElementById("container").appendChild(space);
     document.getElementById("container").appendChild(newStaff);
+    node = document.createTextNode("C");
+    newLabelC.appendChild(node);
+    node = document.createTextNode("C#");
+    newLabelCSharp.appendChild(node);
+    node = document.createTextNode("D");
+    newLabelD.appendChild(node);
+    node = document.createTextNode("D#");
+    newLabelDSharp.appendChild(node);
+    node = document.createTextNode("E");
+    newLabelE.appendChild(node);
+    node = document.createTextNode("F");
+    newLabelF.appendChild(node);
+    node = document.createTextNode("F#");
+    newLabelFSharp.appendChild(node);
+    node = document.createTextNode("G");
+    newLabelG.appendChild(node);
+    node = document.createTextNode("G#");
+    newLabelGSharp.appendChild(node);
+    node = document.createTextNode("A");
+    newLabelA.appendChild(node);
+    node = document.createTextNode("A#");
+    newLabelASharp.appendChild(node);
+    node = document.createTextNode("B");
+    newLabelB.appendChild(node);
+
+
     document.getElementById(`staff${staves}`).appendChild(newLabelC);
     document.getElementById(`staff${staves}`).appendChild(newLabelCSharp);
     document.getElementById(`staff${staves}`).appendChild(newLabelD);
@@ -235,13 +263,3 @@ function save() {
     melodies.push(newMelody);
     localStorage.setItem("melodies", JSON.stringify(melodies));
 }
-/*
-c.addEventListener("click", addNote(261.63));
-d.addEventListener("click", addNote(293.66));
-e.addEventListener("click", addNote(329.63));
-f.addEventListener("click", addNote(349.23));
-g.addEventListener("click", addNote(392.00));
-a.addEventListener("click", addNote(440.00));
-b.addEventListener("click", addNote(493.88));
-play.addEventListener("click", playLine(notesList, lengthsList, 120))
-*/
