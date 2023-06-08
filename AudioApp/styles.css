@@ -1,6 +1,5 @@
 
 button {
-    background-color: #4CAF50; 
     border: none;
     color: white;
     padding: 10px 20px;
@@ -11,14 +10,9 @@ button {
     font-size: 16px;
     transition-duration: 0.2s;
   }
-  
-  button:hover {
-    background-color: #4cbe50;  
-    color: white;
-  }
-  .note {
 
-    background-color: #000000;
+.note {
+  background-color: #000000;
   }
 
 .staff {
@@ -81,7 +75,6 @@ body {
   color: rgb(108, 149, 185);
 }
 
-
 header {
   width:100%;
   display:flex;
@@ -105,18 +98,6 @@ main {
   justify-content: space-between;
 }
 
-.green:hover{
-  background-color: green;
-}
-.blue:hover{
-  background-color: blue;
-}
-.yellow:hover{
-  background-color: yellow;
-}
-.orange:hover{
-  background-color: orange;
-}
 .first-row, .second-row, .third-row {
   display: flex;
   justify-content: space-between;
