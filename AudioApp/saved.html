@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body onpageshow="changeToSaved()">
+    <header class = "saved-header">
+        <h1 >My saved melodies</h1>
+        <a href = "index.html">Back to main page</a>
+    </header>
+    <br>
+    <main>
+        <div class = "music-boxes"></div>
+        <aside>
+            <label for = "volume" >Volume</label>
+            <input type = "range" name = "volume" class = "volume" min = "0" max = "100" value = "50">
+            <br>
+            <label for = "Tempo" >Tempo</label>
+            <input type = "range" name = "Tempo" class = "tempo" min = 40 max = 200 onchange="changeTempo()" value = 120>
+            <br>
+            <label for = "Chorus" >Chorus</label>
+            <input type = "range" name = "Chorus" class = "chorus" min = 0 max = 100  value = 50>
+            <br>
+            <label for = "Echo" >Echo</label>
+            <input type = "range" name = "Echo" class = "echo" min = 0 max = 100 value = 50>
+        </aside>
+    </main>
+    <script defer src = "new.js"></script>
+
+</body>

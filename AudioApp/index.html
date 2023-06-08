@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="styles.css" rel="stylesheet">
+    <title>Audio App</title>
+</head>
+<body>
+<div class = "container" id = "container">
+    <header>
+        <h1>Audio API</h1>
+
+        <span class = "box-with-label">
+            <label for = "title" class = "label-title">Title:</label>
+            <input type = "text" class = "title" name = "title" value = "Untitled">
+        </span>
+        <a onClick = "changeToSaved()" href = "saved.html">My saved Melodies</a>
+    </header>
+    <br>
+    <main>
+        <div>
+            <div class = "first-row">
+                <button type = "input" class = "c" onClick = "addNote(261.63)">C</button>
+                <button type = "input" class = "c-sharp" onClick = "addNote(277.18)">C#</button>
+                <button type = "input" class = "d" onClick = "addNote(293.66)">D</button>
+                <button type = "input" class = "d-sharp" onClick = "addNote(311.13)">D#</button>
+                <button type = "input" class = "e" onClick = "addNote(329.63)">E</button>
+                <button type = "input" class = "f" onClick = "addNote(349.23)">F</button>
+                <button type = "input" class = "f-sharp" onClick = "addNote(369.99)">F#</button>
+                <button type = "input" class = "g" onClick = "addNote(392.00)">G</button>
+                <button type = "input" class = "g-sharp" onClick = "addNote(415.30)">G#</button>
+                <button type = "input" class = "a" onClick = "addNote(440.00)">A</button>
+                <button type = "input" class = "a-sharp" onClick = "addNote(466.16)">A#</button>
+                <button type = "input" class = "b" onClick = "addNote(493.88)">B</button>
+            </div>
+            <br>
+            <div class = "second-row">
+                <button type = "input" class = "quarter" onClick = "addLength(1)">Quarter Note</button>
+                <button type = "input" class = "half" onClick = "addLength(2)">Half Note</button>
+                <button type = "input" class = "whole" onClick = "addLength(4)">Whole Note</button>
+                <button type = "input" class = "eighth" onClick = "addLength(0.5)">Eighth Note</button>
+                <button type = "input" class = "dot" onClick = "addDot()">Add dot</button>
+            </div>
+            <br>
+            <div class = "third-row">
+                <button type = "input" class = "upOctave" onClick = "upOctave()">Up one octave</button>
+                <button type = "input" class = "downOctave" onClick = "downOctave()">Down one octave</button>
+                <button type = "input" class = "delete" onClick = "deleteNote()">Delete</button>
+                <button type = "input" class = "save" onClick = "save()">Save Melody</button>
+            </div>
+            <br>
+            <button type = "input" class = "play" onClick = "playLine(notesList, lengthsList, tempo)">Play</button>
+        </div>
+        <br>
+        <aside>
+            <label for = "volume" >Volume</label>
+            <input type = "range" name = "volume" class = "volume" min = "0" max = "100" value = "50">
+            <br>
+            <label for = "Tempo" >Tempo</label>
+            <input type = "range" name = "Tempo" class = "tempo" min = 40 max = 200 onchange="changeTempo()" value = 120>
+            <br>
+            <label for = "Chorus" >Chorus</label>
+            <input type = "range" name = "Chorus" class = "chorus" min = 0 max = 100  value = 50>
+            <br>
+            <label for = "Echo" >Echo</label>
+            <input type = "range" name = "Echo" class = "echo" min = 0 max = 100 value = 50>
+        </aside>
+    </main>
+    <div class = "staff" id = "staff1">
+        <p class = "c-label note-label">C</p>
+        <p class = "c-sharp-label note-label">C#</p>
+        <p class = "d-label note-label">D</p>
+        <p class = "d-sharp-label note-label">D#</p>
+        <p class = "e-label note-label">E</p>
+        <p class = "f-label note-label">F</p>
+        <p class = "f-sharp-label note-label">F#</p>
+        <p class = "g-label note-label">G</p>
+        <p class = "g-sharp-label note-label">G#</p>
+        <p class = "a-label note-label">A</p>
+        <p class = "a-sharp-label note-label">A#</p>
+        <p class = "b-label note-label">B</p>
+    </div>
+    <script defer src = "new.js"></script>
+</div>
+</body>
